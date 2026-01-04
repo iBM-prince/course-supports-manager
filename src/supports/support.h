@@ -1,24 +1,24 @@
-#ifndef support_h
-#define support_h
+#ifndef SUPPORT_H
+#define SUPPORT_H
 
 #include "linked_list.h"
 #include <ctype.h>
 
-// Variables globales
-extern int dernier_id;
+/* Global variables */
+extern int last_id;
 
-// Déclaration des fonctions adaptées pour liste chaînée
-void ajouter(Liste *l);
-void modifier(Liste *l);
-void supprimer(Liste *l);
-void afficher(Support s);
-void afficher_liste(Liste *l);
-void filtrer_par_module(Liste *l, char* module);
-void filtrer_par_enseignant(Liste *l, char* enseignant);
-void filtrer_par_type(Liste *l, char* type);
-void rechercher_par_motcle(Liste *l, char* motcle);
-void sauvegarder(Liste *l);
-void charger(Liste *l);
-int compter_elements(Liste *l);
+/* Function declarations adapted for linked list */
+void add_support(Liste *l);
+void edit_support(Liste *l);
+void remove_support(Liste *l);
+void display_support(Support s);
+void printList(Liste *l);
+void findBymodule(Liste *l, char* module);
+void findByteacher(Liste *l, char* teacher);
+void findBytype(Liste *l, char* type);
+void findBykeyword(Liste *l, char* keyword);
+void save_data(Liste *l);
+void load_data(Liste *l);
+int count_elements(Liste *l);
 
 #endif

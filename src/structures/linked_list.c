@@ -75,8 +75,8 @@ void removeBack(Liste *l) {
 }
 
 /* Remove by ID */
-void removeById(Liste *l, int id) {
-    if(l->premier == NULL) return;
+int removeById(Liste *l, int id) {
+    if(l->premier == NULL) return 0;
 
     Element *temp = l->premier;
     Element *prec = NULL;
@@ -87,8 +87,7 @@ void removeById(Liste *l, int id) {
     }
 
     if(temp == NULL) {
-        printf("Support ID %d not found\n", id);
-        return;
+        return 0;
     }
 
     if(prec == NULL) {
@@ -97,23 +96,7 @@ void removeById(Liste *l, int id) {
         prec->suivant = temp->suivant;
     }
     free(temp);
-}
-
-/* Print the list */
-void printList(Liste *l) {
-    if(l->premier == NULL) {
-        printf("The list is empty\n");
-        return;
-    }
-    Element *temp = l->premier;
-    while(temp != NULL) {
-        printf("\nID: %d\nTitre: %s\nModule: %s\nType: %s\nEnseignant: %s\nChemin: %s\nDate: %s\n",
-            temp->data.id_support, temp->data.titre, temp->data.module,
-            temp->data.type, temp->data.enseignant, temp->data.chemin_fichier,
-            temp->data.date_ajout);
-        printf("----------------------\n");
-        temp = temp->suivant;
-    }
+    return 1;
 }
 
 /* Search by ID */

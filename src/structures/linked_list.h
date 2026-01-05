@@ -37,7 +37,7 @@ void addBack(Liste *l, Support s);
 
 void removeFront(Liste *l);
 void removeBack(Liste *l);
-void removeById(Liste *l, int id);
+int removeById(Liste *l, int id);
 
 void printList(Liste *l);
 

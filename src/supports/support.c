@@ -129,7 +129,7 @@ void edit_support(Liste *l) {
 }
 
 // ============ FUNCTION TO DELETE A SUPPORT ============
-void removesupport(Liste *l) {
+void remove_support(Liste *l) {
     if (l->premier == NULL) {
         printf("\n[ERROR] No support available!\n");
         return;
@@ -252,4 +252,49 @@ void load_data(Liste *l) {
     }
 
     fclose(f);
+}
+
+/* French API wrappers for compatibility with main.c */
+int compter_elements(Liste *l) {
+    return count_elements(l);
+}
+
+void ajouter(Liste *l) {
+    add_support(l);
+}
+
+void modifier(Liste *l) {
+    edit_support(l);
+}
+
+void supprimer(Liste *l) {
+    remove_support(l);
+}
+
+void afficher_liste(Liste *l) {
+    printList(l);
+}
+
+void filtrer_par_module(Liste *l, char* module) {
+    findBymodule(l, module);
+}
+
+void filtrer_par_enseignant(Liste *l, char* teacher) {
+    findByteacher(l, teacher);
+}
+
+void filtrer_par_type(Liste *l, char* type) {
+    findBytype(l, type);
+}
+
+void rechercher_par_motcle(Liste *l, char* keyword) {
+    findBykeyword(l, keyword);
+}
+
+void sauvegarder(Liste *l) {
+    save_data(l);
+}
+
+void charger(Liste *l) {
+    load_data(l);
 }

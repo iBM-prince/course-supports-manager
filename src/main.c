@@ -1,3 +1,4 @@
+#include "supports/support.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "support.h"
@@ -15,7 +16,7 @@ int main()
     }
     
     // Charger les données sauvegardées
-    charger(liste);
+    load_data(liste);
     
     int choix;
     
@@ -28,25 +29,25 @@ int main()
         #endif
         
         printf("\n");
-        printf("  ╔═══════════════════════════════════════════════════╗\n");
-        printf("  ║   GESTION DES SUPPORTS DE COURS - SUPDECO        ║\n");
-        printf("  ╚═══════════════════════════════════════════════════╝\n");
+        printf(" \n");
+        printf(" GESTION DES SUPPORTS DE COURS - SUPDECO\n");
+        printf("  \n");
         printf("\n");
-        printf("  ┌───────────────────────────────────────────────────┐\n");
-        printf("  │  1. Ajouter un support                            │\n");
-        printf("  │  2. Modifier un support                           │\n");
-        printf("  │  3. Supprimer un support                          │\n");
-        printf("  │  4. Visualiser tous les supports                  │\n");
-        printf("  ├───────────────────────────────────────────────────┤\n");
-        printf("  │  5. Filtrer par module                            │\n");
-        printf("  │  6. Filtrer par enseignant                        │\n");
-        printf("  │  7. Filtrer par type                              │\n");
-        printf("  │  8. Rechercher par mot-cle                        │\n");
-        printf("  ├───────────────────────────────────────────────────┤\n");
-        printf("  │  9. Sauvegarder les donnees                       │\n");
-        printf("  │  0. Quitter                                       │\n");
-        printf("  └───────────────────────────────────────────────────┘\n");
-        printf("\n  Supports actuels: %d\n", compter_elements(liste));
+        printf("  \n");
+        printf("    1. Ajouter un support                            \n");
+        printf("    2. Modifier un support                           \n");
+        printf("    3. Supprimer un support                          \n");
+        printf("    4. Visualiser tous les supports                  \n");
+        printf("  \n");
+        printf("    5. Filtrer par module                            \n");
+        printf("    6. Filtrer par enseignant                        \n");
+        printf("    7. Filtrer par type                              \n");
+        printf("    8. Rechercher par mot-cle                        \n");
+        printf("  \n");
+        printf("    9. Sauvegarder les donnees                       \n");
+        printf("    0. Quitter                                       \n");
+        printf("  \n");
+        printf("\n  Supports actuels: %d\n", count_elements(liste));
         printf("\n  => Votre choix: ");
         
         scanf("%d", &choix);
@@ -54,19 +55,19 @@ int main()
         
         switch(choix) {
             case 1:
-                ajouter(liste);
+                add_support(liste);
                 break;
                 
             case 2:
-                modifier(liste);
+                edit_support(liste);
                 break;
                 
             case 3:
-                supprimer(liste);
+                remove_support(liste);
                 break;
                 
             case 4:
-                afficher_liste(liste);
+                printList(liste);
                 break;
                 
             case 5: {
@@ -74,7 +75,7 @@ int main()
                 printf("\n  Entrer le nom du module: ");
                 fgets(module, 100, stdin);
                 module[strcspn(module, "\n")] = 0;
-                filtrer_par_module(liste, module);
+                findBymodule(liste, module);
                 break;
             }
             
@@ -83,7 +84,7 @@ int main()
                 printf("\n  Entrer le nom de l'enseignant: ");
                 fgets(enseignant, 100, stdin);
                 enseignant[strcspn(enseignant, "\n")] = 0;
-                filtrer_par_enseignant(liste, enseignant);
+                findByteacher(liste, enseignant);
                 break;
             }
             
@@ -93,7 +94,7 @@ int main()
                 printf("  Entrer le type: ");
                 fgets(type, 50, stdin);
                 type[strcspn(type, "\n")] = 0;
-                filtrer_par_type(liste, type);
+                findBytype(liste, type);
                 break;
             }
             
@@ -102,12 +103,12 @@ int main()
                 printf("\n  Entrer le mot-cle: ");
                 fgets(motcle, 100, stdin);
                 motcle[strcspn(motcle, "\n")] = 0;
-                rechercher_par_motcle(liste, motcle);
+                findBykeyword(liste, motcle);
                 break;
             }
             
             case 9:
-                sauvegarder(liste);
+                save_data(liste);
                 break;
                 
             case 0:
@@ -115,7 +116,7 @@ int main()
                 char reponse;
                 scanf("%c", &reponse);
                 if(reponse == 'o' || reponse == 'O') {
-                    sauvegarder(liste);
+                    save_data(liste);
                 }
                 printf("\n  Merci d'avoir utilise l'application!\n\n");
                 break;

@@ -1,78 +1,44 @@
 #include "support.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include "../database/mysql_handler.h" // Indispensable pour l'accès BDD
 
-// Global variable for auto-incrementing the ID
-int last_id = 0;
+// Note: last_id n'est plus utilisé car MySQL gère l'auto-incrément
 
-// ============ FUNCTION TO DISPLAY A SUPPORT ============
 void display_support(Support s) {
-    printf("\n+------------------------------------------------------------+\n");
-    printf("| ID          : %-45d |\n", s.id_support);
-    printf("| Title       : %-45s |\n", s.titre);
-    printf("| Module      : %-45s |\n", s.module);
-    printf("| Teacher     : %-45s |\n", s.enseignant);
-    printf("| Type        : %-45s |\n", s.type);
-    printf("| File path   : %-45s |\n", s.chemin_fichier);
-    printf("| Date added  : %-45s |\n", s.date_ajout);
-    printf("+------------------------------------------------------------+\n");
+    printf("ID: %d | %s | %s | %s | %s | %s\n",
+           s.id_support, s.titre, s.module, s.type, s.enseignant, s.date_ajout);
 }
 
-// ============ FUNCTION TO COUNT ELEMENTS ============
 int count_elements(Liste *l) {
     int count = 0;
     Element *temp = l->premier;
-    while (temp != NULL) {
+    while (temp) {
         count++;
         temp = temp->suivant;
     }
     return count;
 }
 
-// ============ FUNCTION TO ADD A SUPPORT ============
-void add_support(Liste *l) {
-    Support nouveau;
+// Main function called by the "Add" button
+void ajouter_support_gui(Liste *l, MYSQL *conn,
+                         const char *titre,
+                         const char *module,
+                         const char *type,
+                         const char *enseignant,
+                         const char *chemin) {
+    Support s;
 
-    // Auto-incremented ID
-    nouveau.id_support = ++last_id;
+    // 1. Filling in text data
+    strncpy(s.titre, titre, sizeof(s.titre)-1); s.titre[sizeof(s.titre)-1]=0;
+    strncpy(s.module, module, sizeof(s.module)-1); s.module[sizeof(s.module)-1]=0;
+    strncpy(s.type, type, sizeof(s.type)-1); s.type[sizeof(s.type)-1]=0;
+    strncpy(s.enseignant, enseignant, sizeof(s.enseignant)-1); s.enseignant[sizeof(s.enseignant)-1]=0;
+    strncpy(s.chemin_fichier, chemin, sizeof(s.chemin_fichier)-1); s.chemin_fichier[sizeof(s.chemin_fichier)-1]=0;
 
-    printf("\n========== ADD A SUPPORT ==========\n");
-
-    printf("\nSupport title: ");
-    fgets(nouveau.titre, 100, stdin);
-    nouveau.titre[strcspn(nouveau.titre, "\n")] = 0;
-
-    printf("Module: ");
-    fgets(nouveau.module, 100, stdin);
-    nouveau.module[strcspn(nouveau.module, "\n")] = 0;
-
-    printf("Teacher: ");
-    fgets(nouveau.enseignant, 100, stdin);
-    nouveau.enseignant[strcspn(nouveau.enseignant, "\n")] = 0;
-
-    int valid_type = 0;
-    while (!valid_type) {
-        printf("Type (PDF/PPT/VIDEO/NOTE/BOOK): ");
-        fgets(nouveau.type, 50, stdin);
-        nouveau.type[strcspn(nouveau.type, "\n")] = 0;
-
-        for (int i = 0; nouveau.type[i]; i++) {
-            nouveau.type[i] = toupper(nouveau.type[i]);
-        }
-
-        if (strcmp(nouveau.type, "PDF") == 0 ||
-            strcmp(nouveau.type, "PPT") == 0 ||
-            strcmp(nouveau.type, "VIDEO") == 0 ||
-            strcmp(nouveau.type, "NOTE") == 0 ||
-            strcmp(nouveau.type, "BOOK") == 0) {
-            valid_type = 1;
-        } else {
-            printf("[ERROR] Invalid type!\n");
-        }
-    }
-
-    printf("File path: ");
-    fgets(nouveau.chemin_fichier, 200, stdin);
-    nouveau.chemin_fichier[strcspn(nouveau.chemin_fichier, "\n")] = 0;
-
+    // 2. Date management (SQL format YYYY-MM-DD)
     time_t t = time(NULL);
     struct tm *tm_info = localtime(&t);
     strftime(nouveau.date_ajout, 20, "%d/%m/%Y", tm_info);
@@ -249,6 +215,10 @@ void load_data(Liste *l) {
                   s.chemin_fichier,
                   s.date_ajout) == 7) {
         addBack(l, s);
+        
+        printf("Succès : Support ajouté avec l'ID MySQL %d\n", s.id_support);
+    } else {
+        fprintf(stderr, "Erreur : Impossible d'insérer le support dans la base.\n");
     }
 
     fclose(f);

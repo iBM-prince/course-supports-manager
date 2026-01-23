@@ -1,3 +1,5 @@
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
 #ifndef LINKED_LIST_H 
 #define LINKED_LIST_H 
 

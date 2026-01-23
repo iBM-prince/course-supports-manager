@@ -8,14 +8,16 @@
 void display_support(Support s);
 int count_elements(Liste *l);
 
-    // Nouvelle signature avec MYSQL *conn
-void ajouter_support_gui(Liste *l, MYSQL *conn,
-                         const char *titre,
-                         const char *module,
-                         const char *type,
-                         const char *enseignant,
-                         const char *chemin);
-
-// Note: save_data and load_data have been removed because they were replaced by the database
-
+/* French API wrappers (compatibility with main.c) */
+int count_elements(Liste *l);
+void add_support(Liste *l);
+void edit_support(Liste *l);
+void remove_support(Liste *l);
+void printList(Liste *l);
+void findBymodule(Liste *l, char* module);
+void findByteacher(Liste *l, char* teacher);
+void findBytype(Liste *l, char* type);
+void findBykeyword(Liste *l, char* keyword);
+void save_data(Liste *l);
+void load_data(Liste *l);
 #endif

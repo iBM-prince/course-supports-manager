@@ -10,10 +10,10 @@ USE Gestion_Support;
 
 CREATE TABLE IF NOT EXISTS Support (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    titre VARCHAR(200) NOT NULL,
-    module VARCHAR(100) NOT NULL,
-    types VARCHAR(100) NOT NULL,
-    enseignant VARCHAR(100) NOT NULL,
-    chemin VARCHAR(255) NOT NULL,
+    titre VARCHAR(80) NOT NULL,
+    module VARCHAR(80) NOT NULL,
+    types VARCHAR(80) NOT NULL,
+    enseignant VARCHAR(80) NOT NULL,
+    chemin VARCHAR(80) NOT NULL,
     date_ajout DATETIME DEFAULT CURRENT_TIMESTAMP
 );

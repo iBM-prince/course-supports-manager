@@ -41,7 +41,7 @@ void ajouter_support_gui(Liste *l, MYSQL *conn,
     // 2. Gestion de la date (Format SQL YYYY-MM-DD)
     time_t t = time(NULL);
     struct tm *tm_info = localtime(&t);
-    strftime(nouveau.date_ajout, 20, "%d/%m/%Y", tm_info);
+    strftime(s.date_ajout, sizeof(s.date_ajout), "%Y-%m-%d", tm_info);
 
     // 3. Insertion dans MySQL
     // On passe l'adresse de s (&s) et la connexion
@@ -58,51 +58,4 @@ void ajouter_support_gui(Liste *l, MYSQL *conn,
     } else {
         fprintf(stderr, "Erreur : Impossible d'insérer le support dans la base.\n");
     }
-
-    fclose(f);
-}
-
-/* French API wrappers for compatibility with main.c */
-int compter_elements(Liste *l) {
-    return count_elements(l);
-}
-
-void ajouter(Liste *l) {
-    add_support(l);
-}
-
-void modifier(Liste *l) {
-    edit_support(l);
-}
-
-void supprimer(Liste *l) {
-    remove_support(l);
-}
-
-void afficher_liste(Liste *l) {
-    printList(l);
-}
-
-void filtrer_par_module(Liste *l, char* module) {
-    findBymodule(l, module);
-}
-
-void filtrer_par_enseignant(Liste *l, char* teacher) {
-    findByteacher(l, teacher);
-}
-
-void filtrer_par_type(Liste *l, char* type) {
-    findBytype(l, type);
-}
-
-void rechercher_par_motcle(Liste *l, char* keyword) {
-    findBykeyword(l, keyword);
-}
-
-void sauvegarder(Liste *l) {
-    save_data(l);
-}
-
-void charger(Liste *l) {
-    load_data(l);
 }

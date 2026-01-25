@@ -8,6 +8,7 @@
 
 int main() 
 {
+    
     // Initialiser la liste chaînée
     Liste *liste = initialisation();
     if(liste == NULL) {

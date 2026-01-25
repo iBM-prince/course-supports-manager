@@ -1,52 +1,99 @@
-Gestion des supports de cours
-Petit projet en langage C réalisé dans le cadre du module Algorithmique et Programmation 3.
-Objectif : gérer des supports de cours (PDF, PPT, vidéos, etc.) en mode console, en utilisant une liste chaînée.
-​
+<h1> Projet Algorithmique et Programmation 3 - 2025-2026</h1>
+<h3> Application complète en C avec GTK4, MySQL, liste chaînée, pile et file.</h3>
 
-1. Ce que fait le programme
-Version mi‑parcours (présentation du 8 janvier) – fonctionnalités de la section 2 :
-​
+🎯 Fonctionnalités
+100% du cahier des charges respecté :
 
-Ajouter un support.
+✅ CRUD supports : Ajouter/Modifier/Supprimer/Visualiser
 
-Modifier un support.
+✅ Liste chaînée : Chargement/sauvegarde MySQL ↔ mémoire
 
-Supprimer un support.
+✅ Pile : Historique des consultations (popup dédiée)
 
-Afficher tous les supports.
+✅ File : Notifications (zone dédiée)
 
-Filtrer par module / enseignant / type.
+✅ Interface GTK4 : Thème SupDeCo, moderne
 
-Rechercher un support par mot‑clé.
+✅ MySQL C-API : Persistance complète (table supports)
 
-Chaque support contient : id, titre, module, type, enseignant, chemin du fichier, date d’ajout.
-​
+✅ Ouverture fichiers : Double-clic → "Ouvrir fichier"
 
-2. Comment compiler et exécuter
-Depuis la racine du projet :
+🛠 Compilation & Exécution
+MSYS2/MinGW64 (Windows) :
 
 bash
-gcc -Istructures -Isupports main.c supports/support.c structures/linked_list.c -o app
-./app.exe
+pacman -S mingw-w64-x86_64-gtk4 mingw-w64-x86_64-libmariadbclient
+gcc -Isupports -Istructures -Idatabase gui/main_gtk.c supports/*.c structures/*.c database/*.c \
+    `pkg-config --cflags --libs gtk4 libmariadb` -o app_gtk.exe
+./app_gtk.exe
+📁 Organisation modulaire (.c/.h)
 
+src/
+├── gui/           # Interface GTK4 (main_gtk.c)
+├── supports/      # Structure Support + CRUD (support.c/h)
+├── structures/    # Liste chaînée, Pile, File (linked_list.c/h, stack.c/h, queue.c/h)
+├── database/      # MySQL C-API (mysql_handler.c/h)
+└── sql/           # Schema BDD (create_table.sql)
+<h1>🗄 Base de données MySQL</h1>
+Script sql/create_table.sql :
 
-3. Organisation des fichiers
-structures/linked_list.h / structures/linked_list.c
-Implémentation de la liste chaînée des supports (ajout, suppression, affichage, recherche).
+sql
+CREATE DATABASE IF NOT EXISTS gestion_supports_db;
+USE gestion_supports_db;
+CREATE TABLE supports (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    titre TEXT NOT NULL,
+    module TEXT,
+    type TEXT,
+    enseignant TEXT,
+    chemin TEXT,
+    date_ajout TEXT
+);
+<h1>👥 Répartition des tâches (Équipe 3)</h1>
+Membre	          Tâches principales
+Abdoulaye	      database/mysql_handler.c/.h (MySQL C-API), stack.h
+Ange	          support.c/support.h, stack.c
+Ibrahima	      linked_list.c/.h, queue.c/.h, main_gtk.c
 
-supports/support.h / supports/support.c
-Définition de la structure Support et fonctions de gestion (CRUD, filtres, recherche).
+<h1>🎨 Fonctionnalités avancées</h1>
 
-sql/create_table.sql
-Script SQL pour créer la base et la table supports (id, titre, module, type, enseignant, chemin, date_ajout).
-​
+Thème SupDeCo : Bleu/Or institutionnel
 
-docs/
-Diaporama de la présentation mi‑parcours.
+Mode édition : "Ajouter" → "Sauvegarder Modif."
 
-4. Équipe
-Ibrahima : structures de données (liste chaînée).
+Synchronisation temps réel : Liste ↔ MySQL
 
-Ange : gestion des supports + interface console (main.c).
+Gestion erreurs : Connexion BDD, champs vides
 
-Abdoulaye : script SQL (sql/create_table.sql) et future intégration MySQL.
+Ouverture fichiers : Windows start, Linux xdg-open
+
+<h1>📚 Comment utiliser</h1>
+Lancer : ./app_gtk.exe
+
+Ajouter : Remplir formulaire → "Ajouter"
+
+Modifier : Sélectionner → "Modifier" → changer → "Sauvegarder"
+
+Supprimer : Sélectionner → "Supprimer"
+
+Historique : Bouton "Historique" (pile des consultations)
+
+🔧 <h1> Dépendances </h1>
+GTK4 : Interface graphique
+
+libmariadbclient : MySQL C-API
+
+MSYS2/MinGW : Compilation Windows
+
+📈 <h2>État du projet</h2>
+
+Critère sujet	            Statut
+Liste chaînée	            ✅ linked_list.c/.h
+Pile (historique)	        ✅ stack.c/.h
+File (notifications)	    ✅ queue.c/.h
+Interface GTK4	            ✅ main_gtk.c
+MySQL C-API	                ✅ mysql_handler.c/.h
+Gestion mémoire	            ✅ malloc/free
+Modularité	                ✅ .c/.h propres
+
+Présentation finale 22 janvier 2026 → Projet COMPLET ! 🎉

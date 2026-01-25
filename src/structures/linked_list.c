@@ -6,11 +6,7 @@ Liste* initialisation() {
     if (l == NULL) {
 /* List initialization */
 Liste* initialisation() {
-    Liste *l = (Liste*)malloc(sizeof(Liste));
-    if(l == NULL) {
-        printf("Memory allocation error\n");
-        return NULL;
-    }
+    Liste *l = malloc(sizeof(Liste));
     l->premier = NULL;
     return l;
 }
@@ -33,13 +29,9 @@ void addFront(Liste *l, Support s) {
 
 /* Add at end */
 void addBack(Liste *l, Support s) {
-    Element *nouveau = (Element*)malloc(sizeof(Element));
-    if(nouveau == NULL) {
-        printf("Memory allocation error\n");
-        return;
-    }
-    nouveau->data = s;
-    nouveau->suivant = NULL;
+    Element *e = malloc(sizeof(Element));
+    e->data = s;
+    e->suivant = NULL;
 
     if (l->premier == NULL) {
         l->premier = nouveau;
@@ -126,57 +118,31 @@ void removeBack(Liste *l) {
     while(temp->suivant->suivant != NULL) {
         temp = temp->suivant;
     }
-    free(temp->suivant);
-    temp->suivant = NULL;
 }
 
-/* Remove by ID */
-int removeById(Liste *l, int id) {
-    if(l->premier == NULL) return 0;
-
-    Element *temp = l->premier;
-    Element *prec = NULL;
-
-    while(temp != NULL && temp->data.id_support != id) {
-        prec = temp;
-        temp = temp->suivant;
-    }
-
-    if(temp == NULL) {
-        return 0;
-    }
-
-    if(prec == NULL) {
-        l->premier = temp->suivant;
-    } else {
-        prec->suivant = temp->suivant;
-    }
-    free(temp);
-    return 1;
-}
-
-/* Search by ID */
 Element* findById(Liste *l, int id) {
     Element *temp = l->premier;
-    while(temp != NULL) {
-        if(temp->data.id_support == id)
-            return temp;
+    while (temp) {
+        if (temp->data.id_support == id) return temp;
         temp = temp->suivant;
     }
     return NULL;
 }
 
-/* Search by keyword */
-Element* findByKeyword(Liste *l, const char* mot) {
+int removeById(Liste *l, int id) {
+    if (!l->premier) return 0;
     Element *temp = l->premier;
-    while(temp != NULL) {
-        if(strstr(temp->data.titre, mot) ||
-           strstr(temp->data.module, mot) ||
-           strstr(temp->data.type, mot) ||
-           strstr(temp->data.enseignant, mot)) {
-            return temp;
+    Element *prev = NULL;
+
+    while (temp) {
+        if (temp->data.id_support == id) {
+            if (prev) prev->suivant = temp->suivant;
+            else l->premier = temp->suivant;
+            free(temp);
+            return 1;
         }
+        prev = temp;
         temp = temp->suivant;
     }
-    return NULL;
+    return 0;
 }

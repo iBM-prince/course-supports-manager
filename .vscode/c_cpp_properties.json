@@ -1,48 +1,19 @@
 {
     "configurations": [
         {
-            "name": "WIN32",
+            "name": "windows-gcc-x86",
             "includePath": [
-                "c:/Users/torre/course-supports-manager/\"c:/Users/torre/course-supports-manager/src/**\",",
-                "c:/Users/torre/course-supports-manager/\"C:/msys64/mingw64/include\",",
-                "c:/Users/torre/course-supports-manager/\"C:/msys64/mingw64/include/mysql\",",
-                "\"/mingw64/include/mysql\"",
-                "C:/msys64/mingw64/include/**",
-                "C:/msys64/mingw64/include/gtk-4.0"
+                "C:\\mingw64\\include",
+                "C:\\mingw64\\lib\\gcc\\x86_64-w64-mingw32\\*\\include",
+                "${workspaceFolder}/**"
             ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "compilerPath": "C:/msys64/mingw64/bin/gcc.exe",
-            "cStandard": "c17",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "windows-gcc-x86",
-            "compilerPathInCppPropertiesJson": "C:/msys64/mingw64/bin/gcc.exe",
-            "mergeConfigurations": false,
-            "recursiveIncludes": {},
-            "browse": {
-                "limitSymbolsToIncludedHeaders": true
-            }
-        },
-        {
-            "name": "MSYS2",
-            "includePath": [
-                "\"${workspaceFolder}/src/**\",",
-                "\"C:/msys64/mingw64/include\",",
-                "\"C:/msys64/mingw64/include/mysql\",",
-                "\"/mingw64/include/mysql\""
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "compilerPath": "C:\\MinGW\\bin\\gcc.exe",
-            "cStandard": "c17",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "windows-gcc-x86"
+            "compilerPath": "C:/mingw/bin/gcc.exe",
+            "cStandard": "${default}",
+            "cppStandard": "${default}",
+            "intelliSenseMode": "windows-gcc-x64",
+            "compilerArgs": [
+                ""
+            ]
         }
     ],
     "version": 4

@@ -8,7 +8,7 @@
 void display_support(Support s);
 int count_elements(Liste *l);
 
-    // Nouvelle signature avec MYSQL *conn
+    // New signature with MYSQL *conn
 void ajouter_support_gui(Liste *l, MYSQL *conn,
                          const char *titre,
                          const char *module,

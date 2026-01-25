@@ -1,0 +1,49 @@
+{
+    "configurations": [
+        {
+            "name": "WIN32",
+            "includePath": [
+                "c:/Users/torre/course-supports-manager/\"c:/Users/torre/course-supports-manager/src/**\",",
+                "c:/Users/torre/course-supports-manager/\"C:/msys64/mingw64/include\",",
+                "c:/Users/torre/course-supports-manager/\"C:/msys64/mingw64/include/mysql\",",
+                "\"/mingw64/include/mysql\"",
+                "C:/msys64/mingw64/include/**",
+                "C:/msys64/mingw64/include/gtk-4.0"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/msys64/mingw64/bin/gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "windows-gcc-x86",
+            "compilerPathInCppPropertiesJson": "C:/msys64/mingw64/bin/gcc.exe",
+            "mergeConfigurations": false,
+            "recursiveIncludes": {},
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true
+            }
+        },
+        {
+            "name": "MSYS2",
+            "includePath": [
+                "\"${workspaceFolder}/src/**\",",
+                "\"C:/msys64/mingw64/include\",",
+                "\"C:/msys64/mingw64/include/mysql\",",
+                "\"/mingw64/include/mysql\""
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:\\MinGW\\bin\\gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "windows-gcc-x86"
+        }
+    ],
+    "version": 4
+}
